@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_08_174513) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_01_090150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "feeds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url"
@@ -20,5 +26,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_08_174513) do
     t.string "platform"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "feed_id", null: false
+    t.index ["feed_id"], name: "index_sources_on_feed_id"
   end
+
+  add_foreign_key "sources", "feeds"
 end
