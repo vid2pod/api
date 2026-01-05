@@ -1,0 +1,30 @@
+{
+  id: @feed.id,
+  name: @feed.name,
+  created_at: @feed.created_at,
+  updated_at: @feed.updated_at,
+  videos: @feed.videos.order(published_at: :desc, created_at: :desc).map do |video|
+    {
+      id: video.id,
+      title: video.title,
+      description: video.description,
+      url: video.url,
+      platform: video.platform,
+      thumbnail: video.thumbnail,
+      duration: video.duration,
+      published_at: video.published_at,
+      created_at: video.created_at,
+      updated_at: video.updated_at,
+      download: if video.download
+        {
+          id: video.download.id,
+          status: video.download.status,
+          file_attached: video.download.file.attached?,
+          file_url: video.download.file.attached? ? rails_blob_url(video.download.file, host: Rails.env.production? ? 'downloads.vid2pod.com' : 'localhost', port: Rails.env.production? ? nil : 3000) : nil,
+          file_size: video.download.file.attached? ? video.download.file.byte_size : nil,
+          file_content_type: video.download.file.attached? ? video.download.file.content_type : nil
+        }
+      end
+    }
+  end
+}

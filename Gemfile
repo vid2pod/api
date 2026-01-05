@@ -8,6 +8,7 @@ gem 'bootsnap', require: false
 gem 'aws-sdk-s3'
 gem 'rack-cors'
 gem 'builder'
+gem 'jb'
 
 group :development, :test do
   gem 'byebug'
