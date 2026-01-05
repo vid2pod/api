@@ -268,6 +268,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3
   bootsnap
+  builder
   byebug
   factory_bot_rails
   pg

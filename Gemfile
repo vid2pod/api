@@ -6,6 +6,7 @@ gem 'puma'
 gem 'bootsnap', require: false
 gem 'aws-sdk-s3'
 gem 'rack-cors'
+gem 'builder'
 
 group :development, :test do
   gem 'byebug'
