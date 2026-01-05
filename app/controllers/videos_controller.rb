@@ -9,6 +9,13 @@ class VideosController < ApplicationController
     # return a 201
   end
 
+  def destroy
+    @video = Video.find params[:id]
+    @video.destroy
+
+    render json: @video
+  end
+
   private
 
   def find_or_create_default_feed
