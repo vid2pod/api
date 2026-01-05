@@ -45,7 +45,7 @@ xml.tag!('rss',
         # Enclosure (audio file from download)
         if video.download&.status == 'completed' && video.download.file.attached?
           xml.enclosure(
-            url: rails_blob_url(video.download.file, host: Rails.env.production? ? 'downloads.vid2pod.com' :'localhost', port: Rails.env.production? ? nil : 3000),
+            url: video.download.file_url,
             length: video.download.file.byte_size,
             type: video.download.file.content_type
           )

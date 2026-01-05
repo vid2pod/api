@@ -20,7 +20,7 @@
           id: video.download.id,
           status: video.download.status,
           file_attached: video.download.file.attached?,
-          file_url: video.download.file.attached? ? rails_blob_url(video.download.file, host: Rails.env.production? ? 'downloads.vid2pod.com' : 'localhost', port: Rails.env.production? ? nil : 3000) : nil,
+          file_url: video.download.file_url,
           file_size: video.download.file.attached? ? video.download.file.byte_size : nil,
           file_content_type: video.download.file.attached? ? video.download.file.content_type : nil
         }
