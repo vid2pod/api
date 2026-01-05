@@ -277,5 +277,8 @@ DEPENDENCIES
   rails (~> 8.0.2)
   rspec-rails
 
+RUBY VERSION
+   ruby 3.4.3p32
+
 BUNDLED WITH
    2.6.9
