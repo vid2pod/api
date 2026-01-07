@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :videos, only: [:create, :destroy]
-  resources :feeds, only: :show
+  resources :feeds, only: :show do
+    resources :videos, only: [:create, :destroy]
+  end
 
   root 'application#default'
 end
