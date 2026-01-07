@@ -1,4 +1,4 @@
-class MetadataFetcherJob < ApplicationJob
+class VideoMetadataFetcherJob < ApplicationJob
   queue_as :default
 
   def perform(video_id)

@@ -1,12 +1,16 @@
 class VideosController < ApplicationController
   def create
-    @feed = find_or_create_default_feed
+    @feed = find_or_create_feed
     @video = @feed.videos.create! video_params
 
-    MetadataFetcherJob.perform_later(@video.id)
+    VideoMetadataFetcherJob.perform_now(@video.id)
     VideoDownloaderJob.perform_later(@video.id)
 
-    # return a 201
+    render json: {
+      id: @video.id,
+      feed_id: @feed.id,
+      url: @video.url,
+    }, status: :created
   end
 
   def destroy

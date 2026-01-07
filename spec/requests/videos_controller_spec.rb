@@ -28,7 +28,24 @@ RSpec.describe 'VideosController', type: :request do
 
         video = Video.last
         expect(video.feed).to be_present
-        expect(video.feed.name).to eq('Default')
+        expect(video.feed.name).to eq("Feed for #{url}")
+      end
+
+      it 'returns a 201 created status' do
+        post videos_path, params: valid_params
+
+        expect(response).to have_http_status(:created)
+      end
+
+      it 'returns JSON with the video id, feed_id, and url' do
+        post videos_path, params: valid_params
+
+        video = Video.last
+        json_response = JSON.parse(response.body)
+
+        expect(json_response['id']).to eq(video.id)
+        expect(json_response['feed_id']).to eq(video.feed.id)
+        expect(json_response['url']).to eq(url)
       end
 
       context 'if the default feed already exists' do
