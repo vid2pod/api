@@ -9,9 +9,14 @@ gem 'aws-sdk-s3'
 gem 'rack-cors'
 gem 'builder'
 gem 'jb'
+gem 'solid_queue'
 
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+end
+
+group :development do
+  gem 'foreman'
 end
