@@ -86,7 +86,7 @@ All YouTube interactions go through yt-dlp command-line tool via shell commands.
 
 File URLs are generated with different hosts:
 - Development: `http://localhost:3000`
-- Production: `https://downloads.vid2pod.com` (from Download model) and `ENV['APP_HOST']` (from FeedsController)
+- Production: `https://downloads.vid2pod.fm` (from Download model) and `ENV['APP_HOST']` (from FeedsController)
 
 ### RSS Feed Generation
 

@@ -1,20 +1,20 @@
 # AWS S3 Bucket Setup Summary
 
-This document summarizes all the commands used to set up the `downloads.vid2pod.com` S3 bucket and IAM user.
+This document summarizes all the commands used to set up the `downloads.vid2pod.fm` S3 bucket and IAM user.
 
 ## 1. Create S3 Bucket
 
 ```bash
-aws s3 mb s3://downloads.vid2pod.com --profile personal --region us-east-1
+aws s3 mb s3://downloads.vid2pod.fm --profile personal --region us-east-1
 ```
 
-Created the S3 bucket `downloads.vid2pod.com` in the `us-east-1` region.
+Created the S3 bucket `downloads.vid2pod.fm` in the `us-east-1` region.
 
 ## 2. Disable Block Public Access
 
 ```bash
 aws s3api put-public-access-block \
-  --bucket downloads.vid2pod.com \
+  --bucket downloads.vid2pod.fm \
   --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false" \
   --profile personal
 ```
@@ -25,7 +25,7 @@ Disabled Block Public Access settings to allow public read access to objects in 
 
 ```bash
 aws s3api put-bucket-policy \
-  --bucket downloads.vid2pod.com \
+  --bucket downloads.vid2pod.fm \
   --policy file://config/aws/bucket-policy.json \
   --profile personal
 ```
@@ -36,7 +36,7 @@ Applied the bucket policy from `config/aws/bucket-policy.json` to allow public r
 
 ```bash
 aws s3api put-bucket-cors \
-  --bucket downloads.vid2pod.com \
+  --bucket downloads.vid2pod.fm \
   --cors-configuration file://config/aws/cors-policy.json \
   --profile personal
 ```
@@ -68,7 +68,7 @@ Created IAM policy `vid2pod-downloads-policy` with the following details:
 - Policy ID: `[REDACTED]`
 - ARN: `arn:aws:iam::[ACCOUNT_ID]:policy/vid2pod-downloads-policy`
 
-This policy grants the following permissions on the `downloads.vid2pod.com` bucket:
+This policy grants the following permissions on the `downloads.vid2pod.fm` bucket:
 - `s3:PutObject`
 - `s3:GetObject`
 - `s3:DeleteObject`
@@ -99,7 +99,7 @@ Generated access credentials for the IAM user. The credentials have been saved t
 
 ## Summary
 
-The S3 bucket `downloads.vid2pod.com` is now configured with:
+The S3 bucket `downloads.vid2pod.fm` is now configured with:
 - Public read access for all objects
 - CORS enabled for GET and HEAD requests from any origin
 - An IAM user `vid2pod-downloads` with full access to manage objects in the bucket

@@ -10,8 +10,8 @@
         "s3:ListBucket"
       ],
       "Resource": [
-        "arn:aws:s3:::downloads.vid2pod.com",
-        "arn:aws:s3:::downloads.vid2pod.com/*"
+        "arn:aws:s3:::downloads.vid2pod.fm",
+        "arn:aws:s3:::downloads.vid2pod.fm/*"
       ]
     }
   ]

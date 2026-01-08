@@ -16,7 +16,7 @@ class Download < ApplicationRecord
 
   def default_url_options
     if Rails.env.production?
-      { host: 'downloads.vid2pod.com', protocol: 'https', port: nil }
+      { host: 'downloads.vid2pod.fm', protocol: 'https', port: nil }
     else
       { host: 'localhost', protocol: 'http', port: 3000 }
     end
