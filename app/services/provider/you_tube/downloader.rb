@@ -12,9 +12,6 @@ class Provider::YouTube::Downloader < Provider::YouTube::Base
 
       command = build_command(url, output_template, cookies_file)
 
-      # Debug logging
-      Rails.logger.info("yt-dlp command: #{command.join(' ')}")
-
       stdout, stderr, status = Open3.capture3(*command)
 
       unless status.success?
@@ -45,24 +42,10 @@ class Provider::YouTube::Downloader < Provider::YouTube::Base
         '-o', output_template
       ]
 
-      # Add ffmpeg location if it exists (Heroku buildpack installs to /app/vendor/ffmpeg)
-      ffmpeg_paths = [
-        '/app/vendor/ffmpeg/bin',
-        '/app/vendor/ffmpeg',
-        ENV['FFMPEG_PATH']
-      ].compact
-
-      # Debug: Check which ffmpeg
-      ffmpeg_which = `which ffmpeg 2>&1`.strip
-      Rails.logger.info("which ffmpeg: #{ffmpeg_which}")
-      Rails.logger.info("Checking ffmpeg paths: #{ffmpeg_paths.inspect}")
-
-      ffmpeg_path = ffmpeg_paths.find { |path| Dir.exist?(path) }
-      if ffmpeg_path
-        Rails.logger.info("Found ffmpeg at: #{ffmpeg_path}")
-        command += ['--ffmpeg-location', ffmpeg_path]
-      else
-        Rails.logger.warn("No ffmpeg path found. Tried: #{ffmpeg_paths.inspect}")
+      # Heroku buildpack adds ffmpeg to PATH, so --ffmpeg-location shouldn't be needed
+      # But if we need to specify it explicitly, it's at /app/vendor/ffmpeg
+      if Dir.exist?('/app/vendor/ffmpeg')
+        command += ['--ffmpeg-location', '/app/vendor/ffmpeg']
       end
 
       command << url
