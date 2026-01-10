@@ -1,0 +1,71 @@
+{
+  "CallerReference": "vid2pod-downloads-2026-01-10",
+  "Comment": "CloudFront distribution for vid2pod downloads",
+  "Aliases": {
+    "Quantity": 1,
+    "Items": [
+      "downloads.vid2pod.fm"
+    ]
+  },
+  "DefaultRootObject": "",
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "vid2pod-s3-origin",
+        "DomainName": "downloads.vid2pod.fm.s3.us-east-1.amazonaws.com",
+        "OriginPath": "",
+        "CustomHeaders": {
+          "Quantity": 0
+        },
+        "S3OriginConfig": {
+          "OriginAccessIdentity": ""
+        },
+        "OriginAccessControlId": "E1I490A5AU5226"
+      }
+    ]
+  },
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "vid2pod-s3-origin",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "AllowedMethods": {
+      "Quantity": 2,
+      "Items": [
+        "HEAD",
+        "GET"
+      ],
+      "CachedMethods": {
+        "Quantity": 2,
+        "Items": [
+          "HEAD",
+          "GET"
+        ]
+      }
+    },
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+    "OriginRequestPolicyId": "88a5eaf4-2fd4-4709-b370-b4c650ea3fcf",
+    "TrustedSigners": {
+      "Enabled": false,
+      "Quantity": 0
+    },
+    "TrustedKeyGroups": {
+      "Enabled": false,
+      "Quantity": 0
+    }
+  },
+  "CacheBehaviors": {
+    "Quantity": 0
+  },
+  "CustomErrorResponses": {
+    "Quantity": 0
+  },
+  "Enabled": true,
+  "ViewerCertificate": {
+    "ACMCertificateArn": "arn:aws:acm:us-east-1:[ACCOUNT_ID]:certificate/d1c85002-1a94-46cc-9d8d-aafaa743c4ef",
+    "SSLSupportMethod": "sni-only",
+    "MinimumProtocolVersion": "TLSv1.2_2021"
+  },
+  "HttpVersion": "http2",
+  "PriceClass": "PriceClass_100"
+}

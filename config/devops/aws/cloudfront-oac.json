@@ -1,0 +1,7 @@
+{
+  "Name": "vid2pod-s3-oac",
+  "Description": "Origin Access Control for vid2pod S3 bucket",
+  "SigningProtocol": "sigv4",
+  "SigningBehavior": "always",
+  "OriginAccessControlOriginType": "s3"
+}
