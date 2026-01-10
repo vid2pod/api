@@ -27,7 +27,7 @@ class Provider::YouTube::Downloader < Provider::YouTube::Base
     private
 
     def build_command(url, output_template, cookies_file)
-      [
+      command = [
         'yt-dlp',
         '--js-runtimes', 'node',
         '--remote-components', 'ejs:github',
@@ -39,9 +39,17 @@ class Provider::YouTube::Downloader < Provider::YouTube::Base
         '-x',
         '--audio-format', 'mp3',
         '--audio-quality', '0',  # Best quality
-        '-o', output_template,
-        url
+        '-o', output_template
       ]
+
+      # Add ffmpeg location if it exists (Heroku buildpack installs to /app/vendor/ffmpeg)
+      ffmpeg_path = '/app/vendor/ffmpeg'
+      if Dir.exist?(ffmpeg_path)
+        command += ['--ffmpeg-location', ffmpeg_path]
+      end
+
+      command << url
+      command
     end
   end
 end
