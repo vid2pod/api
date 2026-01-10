@@ -9,14 +9,13 @@ class Download < ApplicationRecord
   def file_url
     return nil unless file.attached?
 
-    # In production, this will use the CloudFront CDN (downloads.vid2pod.fm)
-    # via the asset_host configured in production.rb
-    # In development, this will use localhost
     if Rails.env.production?
-      # Use CloudFront URL for production
-      rails_blob_url(file, host: 'downloads.vid2pod.fm', protocol: 'https')
+      # Use direct S3 URL via CloudFront
+      # file.url generates direct S3 path, we replace S3 hostname with CloudFront domain
+      s3_url = file.url
+      s3_url.gsub(/https?:\/\/[^\/]+/, 'https://downloads.vid2pod.fm')
     else
-      # Use localhost for development
+      # Use localhost Rails routing for development
       rails_blob_url(file, host: 'localhost', protocol: 'http', port: 3000)
     end
   end
