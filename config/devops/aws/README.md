@@ -116,6 +116,28 @@ aws s3api put-bucket-versioning \
   --profile personal
 ```
 
+## Troubleshooting
+
+### ACL Errors in Production
+
+**Error:** `Aws::S3::Errors::AccessControlListNotSupported: The bucket does not allow ACLs`
+
+**Cause:** The bucket uses `BucketOwnerEnforced` object ownership (ACLs disabled).
+
+**Solution:** Ensure `config/storage.yml` has `acl: nil` in the amazon configuration:
+
+```yaml
+amazon:
+  service: S3
+  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  region: <%= ENV['AWS_REGION'] || 'us-east-1' %>
+  bucket: <%= ENV['AWS_BUCKET'] %>
+  acl: nil  # Required for BucketOwnerEnforced
+```
+
+Do NOT use `public: true` or any ACL setting when the bucket has ACLs disabled.
+
 ## Support
 
 - AWS Account: [ACCOUNT_ID]

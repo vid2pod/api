@@ -10,6 +10,11 @@ aws s3 mb s3://downloads.vid2pod.fm --profile personal --region us-east-1
 
 Created the S3 bucket `downloads.vid2pod.fm` in the `us-east-1` region.
 
+**Default Settings:**
+- Object Ownership: `BucketOwnerEnforced` (ACLs disabled)
+- This is the recommended secure configuration
+- ActiveStorage must use `acl: nil` in storage.yml to prevent ACL errors
+
 ## 2. Configure Block Public Access
 
 ```bash
