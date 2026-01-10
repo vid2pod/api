@@ -13,7 +13,7 @@ Created the S3 bucket `downloads.vid2pod.fm` in the `us-east-1` region.
 **Default Settings:**
 - Object Ownership: `BucketOwnerEnforced` (ACLs disabled)
 - This is the recommended secure configuration
-- ActiveStorage must use `acl: nil` in storage.yml to prevent ACL errors
+- ActiveStorage config must NOT include any ACL settings (no `public: true`, no `acl:` option)
 
 ## 2. Configure Block Public Access
 

@@ -13,9 +13,9 @@ amazon:
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['AWS_REGION'] || 'us-east-1' %>
   bucket: <%= ENV['AWS_BUCKET'] %>
-  # Bucket has ACLs disabled (BucketOwnerEnforced) - do not set ACLs
+  # Bucket has ACLs disabled (BucketOwnerEnforced)
+  # Do not set 'public: true' or any ACL-related settings
   # Files are served via CloudFront with Origin Access Control
-  acl: nil
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

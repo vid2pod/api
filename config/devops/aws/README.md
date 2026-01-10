@@ -124,7 +124,7 @@ aws s3api put-bucket-versioning \
 
 **Cause:** The bucket uses `BucketOwnerEnforced` object ownership (ACLs disabled).
 
-**Solution:** Ensure `config/storage.yml` has `acl: nil` in the amazon configuration:
+**Solution:** Ensure `config/storage.yml` has NO ACL-related settings in the amazon configuration:
 
 ```yaml
 amazon:
@@ -133,10 +133,16 @@ amazon:
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['AWS_REGION'] || 'us-east-1' %>
   bucket: <%= ENV['AWS_BUCKET'] %>
-  acl: nil  # Required for BucketOwnerEnforced
+  # Do NOT add 'public: true' or 'acl:' settings
 ```
 
-Do NOT use `public: true` or any ACL setting when the bucket has ACLs disabled.
+When the bucket has ACLs disabled (BucketOwnerEnforced), do NOT add any of these settings:
+- `public: true`
+- `acl: nil`
+- `acl: "public-read"`
+- Any other ACL configuration
+
+Simply omit all ACL-related configuration. Files are accessible via CloudFront using Origin Access Control.
 
 ## Support
 
