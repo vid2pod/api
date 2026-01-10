@@ -17,7 +17,7 @@ class VideosController < ApplicationController
     @video = @feed.videos.create! video_params
 
     VideoMetadataFetcherJob.perform_later(@video.id)
-    # VideoDownloaderJob.perform_later(@video.id)  # Commented out - using YouTube redirect instead. Uncomment to use S3 storage.
+    VideoDownloaderJob.perform_later(@video.id)
 
     render json: {
       id: @video.id,
@@ -31,21 +31,6 @@ class VideosController < ApplicationController
     @video.destroy
 
     render json: @video
-  end
-
-  def audio
-    video = Video.find(params[:id])
-
-    begin
-      # Extract fresh YouTube URL
-      youtube_url = Provider::YouTube::UrlExtractor.extract(video.url)
-
-      # Redirect to YouTube
-      redirect_to youtube_url, status: :found, allow_other_host: true
-    rescue => e
-      # Handle errors (video not found, private, deleted, etc.)
-      render json: { error: 'Video unavailable' }, status: :not_found
-    end
   end
 
   private
