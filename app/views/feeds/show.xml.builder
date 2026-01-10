@@ -42,14 +42,12 @@ xml.tag!('rss',
         # Description
         xml.description { xml.cdata!(video.description || '') }
 
-        # Enclosure (audio file from download)
-        if video.download&.status == 'completed' && video.download.file.attached?
-          xml.enclosure(
-            url: video.download.file_url,
-            length: video.download.file.byte_size,
-            type: video.download.file.content_type
-          )
-        end
+        # Enclosure (audio redirect to YouTube)
+        xml.enclosure(
+          url: audio_video_url(video, host: ENV['APP_HOST'] || request.host),
+          length: video.estimated_file_size,
+          type: 'audio/mpeg'
+        )
 
         # GUID and publish date
         xml.guid video.id, isPermaLink: 'false'

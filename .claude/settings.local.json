@@ -3,7 +3,8 @@
     "allow": [
       "Bash(bundle exec rspec:*)",
       "Bash(grep:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(bin/rails runner:*)"
     ]
   }
 }
