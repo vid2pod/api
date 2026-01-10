@@ -39,6 +39,8 @@ class Provider::YouTube::Downloader < Provider::YouTube::Base
         '-x',
         '--audio-format', 'mp3',
         '--audio-quality', '0',  # Best quality
+        '--embed-chapters',
+        '--embed-thumbnail', # got these two options from https://codeberg.org/EvanHahn/dotfiles/src/commit/843b9ee13d949d346a4a73ccee2a99351aed285b/home/bin/bin/getpod
         '-o', output_template
       ]
 

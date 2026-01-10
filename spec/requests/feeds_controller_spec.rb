@@ -171,7 +171,7 @@ RSpec.describe "FeedsController", type: :request do
         end
 
         it 'renders item pubDate as video published_at' do
-          expect(xml.xpath('//item/pubDate').first.text).to eq(video.published_at.rfc2822)
+          expect(xml.xpath('//item/pubDate').first.text).to eq(video.created_at.rfc2822)
         end
       end
 

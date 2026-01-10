@@ -53,7 +53,7 @@ xml.tag!('rss',
 
         # GUID and publish date
         xml.guid video.id, isPermaLink: 'false'
-        xml.pubDate (video.published_at || video.created_at).rfc2822
+        xml.pubDate (video.created_at || video.published_at).rfc2822
       end
     end
   end

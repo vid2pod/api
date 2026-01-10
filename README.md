@@ -36,7 +36,8 @@ https://www.reddit.com/r/podcasts/comments/1lhm3oy/youtube_videos_as_podcasts/
 
 
 # TODO
-- [ ] Play a sound or a tone at the beginning and end of each podcast. And maybe have a voice announce the title, author and duration of a video.
+- [x] Play a sound or a tone at the beginning and end of each podcast.
+- [ ] have a voice announce the title, author and duration of a video.
 - [ ] Setup bookmarklet
 - [ ] Add favicon
 - [ ] Add Image for xml feed for channel
